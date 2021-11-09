@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import net.sourceforge.kolmafia.AscensionClass;
+import net.sourceforge.kolmafia.AscensionPath.Path;
 import net.sourceforge.kolmafia.KoLConstants;
 import net.sourceforge.kolmafia.request.AscensionHistoryRequest;
 import net.sourceforge.kolmafia.request.AscensionHistoryRequest.AscensionDataField;
@@ -15,70 +17,6 @@ import net.sourceforge.kolmafia.session.ContactManager;
 
 public class AscensionSnapshot {
   public static final int NO_FILTER = 0;
-
-  // It's likely this list can be refactored out of the code, with
-  // AscensionPath existing.  Some day.
-  public static final int UNKNOWN_PATH = -1;
-  public static final int NOPATH = 998;
-  public static final int TEETOTALER = 1;
-  public static final int BOOZETAFARIAN = 2;
-  public static final int OXYGENARIAN = 3;
-  public static final int BAD_MOON = 999;
-  public static final int BEES_HATE_YOU = 4;
-  public static final int SURPRISING_FIST = 6;
-  public static final int TRENDY = 7;
-  public static final int AVATAR_OF_BORIS = 8;
-  public static final int BUGBEAR_INVASION = 9;
-  public static final int ZOMBIE_SLAYER = 10;
-  public static final int CLASS_ACT = 11;
-  public static final int AVATAR_OF_JARLSBERG = 12;
-  public static final int BIG = 14;
-  public static final int KOLHS = 15;
-  public static final int CLASS_ACT_II = 16;
-  public static final int AVATAR_OF_SNEAKY_PETE = 17;
-  public static final int SLOW_AND_STEADY = 18;
-  public static final int HEAVY_RAINS = 19;
-  public static final int PICKY = 21;
-  public static final int STANDARD = 22;
-  public static final int ACTUALLY_ED_THE_UNDYING = 23;
-  public static final int CRAZY_RANDOM_SUMMER = 24;
-  public static final int COMMUNITY_SERVICE = 25;
-  public static final int AVATAR_OF_WEST_OF_LOATHING = 26;
-  public static final int THE_SOURCE = 27;
-  public static final int NUCLEAR_AUTUMN = 28;
-  public static final int GELATINOUS_NOOB = 29;
-  public static final int LICENSE = 30;
-  public static final int REPEAT = 31;
-  public static final int POKEFAM = 32;
-  public static final int GLOVER = 33;
-  public static final int DISGUISES_DELIMIT = 34;
-  public static final int DARK_GYFFTE = 35;
-  public static final int CRAZY_RANDOM_SUMMER_TWO = 36;
-  public static final int KINGDOM_OF_EXPLOATHING = 37;
-  public static final int PATH_OF_THE_PLUMBER = 38;
-  public static final int LOWKEY = 39;
-  public static final int GREY_GOO = 40;
-  public static final int YOU_ROBOT = 41;
-  public static final int QUANTUM = 42;
-
-  public static final int UNKNOWN_CLASS = -1;
-  public static final int SEAL_CLUBBER = 1;
-  public static final int TURTLE_TAMER = 2;
-  public static final int PASTAMANCER = 3;
-  public static final int SAUCEROR = 4;
-  public static final int DISCO_BANDIT = 5;
-  public static final int ACCORDION_THIEF = 6;
-  public static final int BORIS = 11;
-  public static final int ZOMBIE_MASTER = 12;
-  public static final int JARLSBERG = 14;
-  public static final int SNEAKY_PETE = 15;
-  public static final int ED = 17;
-  public static final int COW_PUNCHER = 18;
-  public static final int BEAN_SLINGER = 19;
-  public static final int SNAKE_OILER = 20;
-  public static final int NOOB = 23;
-  public static final int VAMPYRE = 24;
-  public static final int PLUMBER = 25;
 
   public static final int UNKNOWN_TYPE = -1;
   public static final int NORMAL = 1;
@@ -232,7 +170,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.PATH_OF_THE_PLUMBER,
+              Path.PATH_OF_THE_PLUMBER,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -242,7 +180,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.KINGDOM_OF_EXPLOATHING,
+              Path.KINGDOM_OF_EXPLOATHING,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -252,7 +190,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.CRAZY_RANDOM_SUMMER_TWO,
+              Path.CRAZY_RANDOM_SUMMER_TWO,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -262,7 +200,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.DARK_GYFFTE,
+              Path.DARK_GYFFTE,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -272,7 +210,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.DISGUISES_DELIMIT,
+              Path.DISGUISES_DELIMIT,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -282,7 +220,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.GLOVER,
+              Path.GLOVER,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -292,7 +230,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.POKEFAM,
+              Path.POKEFAM,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -302,7 +240,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.REPEAT,
+              Path.LIVE_ASCEND_REPEAT,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -312,7 +250,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.LICENSE,
+              Path.LICENSE_TO_ADVENTURE,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -322,7 +260,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.GELATINOUS_NOOB,
+              Path.GELATINOUS_NOOB,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -332,7 +270,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.NUCLEAR_AUTUMN,
+              Path.NUCLEAR_AUTUMN,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -341,17 +279,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.THE_SOURCE,
-              mainBoardSize,
-              classBoardSize,
-              maxAge,
-              playerMoreThanOnce,
-              localProfileLink));
-      strbuf.append(KoLConstants.LINE_BREAK);
-      strbuf.append(
-          AscensionSnapshot.getPathedAscensionData(
-              typeFilter,
-              AscensionSnapshot.AVATAR_OF_WEST_OF_LOATHING,
+              Path.THE_SOURCE,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -361,7 +289,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.COMMUNITY_SERVICE,
+              Path.AVATAR_OF_WEST_OF_LOATHING,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -371,7 +299,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.CRAZY_RANDOM_SUMMER,
+              Path.COMMUNITY_SERVICE,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -381,7 +309,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.ACTUALLY_ED_THE_UNDYING,
+              Path.CRAZY_RANDOM_SUMMER,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -391,7 +319,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.STANDARD,
+              Path.ACTUALLY_ED_THE_UNDYING,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -401,7 +329,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.PICKY,
+              Path.STANDARD,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -411,7 +339,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.HEAVY_RAINS,
+              Path.PICKY,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -421,7 +349,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.SLOW_AND_STEADY,
+              Path.HEAVY_RAINS,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -431,7 +359,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.AVATAR_OF_SNEAKY_PETE,
+              Path.SLOW_AND_STEADY,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -441,7 +369,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.CLASS_ACT_II,
+              Path.AVATAR_OF_SNEAKY_PETE,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -451,7 +379,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.KOLHS,
+              Path.CLASS_ACT_II,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -461,7 +389,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.BIG,
+              Path.KOLHS,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -471,7 +399,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.AVATAR_OF_JARLSBERG,
+              Path.BIG,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -481,7 +409,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.CLASS_ACT,
+              Path.AVATAR_OF_JARLSBERG,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -491,7 +419,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.ZOMBIE_SLAYER,
+              Path.CLASS_ACT,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -501,7 +429,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.BUGBEAR_INVASION,
+              Path.ZOMBIE_SLAYER,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -511,7 +439,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.AVATAR_OF_BORIS,
+              Path.BUGBEAR_INVASION,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -521,7 +449,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.TRENDY,
+              Path.AVATAR_OF_BORIS,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -531,7 +459,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.SURPRISING_FIST,
+              Path.TRENDY,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -541,7 +469,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.BEES_HATE_YOU,
+              Path.SURPRISING_FIST,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -551,7 +479,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.BAD_MOON,
+              Path.BEES_HATE_YOU,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -561,7 +489,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.OXYGENARIAN,
+              Path.BAD_MOON,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -571,7 +499,7 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.TEETOTALER,
+              Path.OXYGENARIAN,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -581,7 +509,17 @@ public class AscensionSnapshot {
       strbuf.append(
           AscensionSnapshot.getPathedAscensionData(
               typeFilter,
-              AscensionSnapshot.BOOZETAFARIAN,
+              Path.TEETOTALER,
+              mainBoardSize,
+              classBoardSize,
+              maxAge,
+              playerMoreThanOnce,
+              localProfileLink));
+      strbuf.append(KoLConstants.LINE_BREAK);
+      strbuf.append(
+          AscensionSnapshot.getPathedAscensionData(
+              typeFilter,
+              Path.BOOZETAFARIAN,
               mainBoardSize,
               classBoardSize,
               maxAge,
@@ -592,7 +530,7 @@ public class AscensionSnapshot {
     strbuf.append(
         AscensionSnapshot.getPathedAscensionData(
             typeFilter,
-            AscensionSnapshot.NOPATH,
+            Path.NONE,
             mainBoardSize,
             classBoardSize,
             maxAge,
@@ -606,7 +544,7 @@ public class AscensionSnapshot {
 
   public static final String getPathedAscensionData(
       final int typeFilter,
-      final int pathFilter,
+      final Path pathFilter,
       final int mainBoardSize,
       final int classBoardSize,
       final int maxAge,
@@ -621,7 +559,7 @@ public class AscensionSnapshot {
         AscensionSnapshot.getAscensionData(
             typeFilter,
             pathFilter,
-            AscensionSnapshot.NO_FILTER,
+            null,
             mainBoardSize,
             classBoardSize,
             maxAge,
@@ -637,16 +575,16 @@ public class AscensionSnapshot {
     // in the KoL leaderboard frame, for class based paths.
 
     switch (pathFilter) {
-      case AscensionSnapshot.AVATAR_OF_BORIS:
-      case AscensionSnapshot.ZOMBIE_SLAYER:
-      case AscensionSnapshot.AVATAR_OF_JARLSBERG:
-      case AscensionSnapshot.AVATAR_OF_SNEAKY_PETE:
-      case AscensionSnapshot.ACTUALLY_ED_THE_UNDYING:
-      case AscensionSnapshot.GELATINOUS_NOOB:
-      case AscensionSnapshot.DARK_GYFFTE:
-      case AscensionSnapshot.PATH_OF_THE_PLUMBER:
+      case AVATAR_OF_BORIS:
+      case ZOMBIE_SLAYER:
+      case AVATAR_OF_JARLSBERG:
+      case AVATAR_OF_SNEAKY_PETE:
+      case ACTUALLY_ED_THE_UNDYING:
+      case GELATINOUS_NOOB:
+      case DARK_GYFFTE:
+      case PATH_OF_THE_PLUMBER:
         break;
-      case AscensionSnapshot.AVATAR_OF_WEST_OF_LOATHING:
+      case AVATAR_OF_WEST_OF_LOATHING:
         strbuf.append(
             "<br><a class=small href=\"javascript:void(0);\" onClick=\"javascript: var element = document.getElementById('sec");
         strbuf.append(pathFilter);
@@ -662,7 +600,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.COW_PUNCHER,
+                AscensionClass.COWPUNCHER,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -675,7 +613,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.BEAN_SLINGER,
+                AscensionClass.BEANSLINGER,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -688,7 +626,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.SNAKE_OILER,
+                AscensionClass.SNAKE_OILER,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -713,7 +651,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.SEAL_CLUBBER,
+                AscensionClass.SEAL_CLUBBER,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -726,7 +664,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.SAUCEROR,
+                AscensionClass.SAUCEROR,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -739,7 +677,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.TURTLE_TAMER,
+                AscensionClass.TURTLE_TAMER,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -752,7 +690,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.DISCO_BANDIT,
+                AscensionClass.DISCO_BANDIT,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -765,7 +703,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.PASTAMANCER,
+                AscensionClass.PASTAMANCER,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -778,7 +716,7 @@ public class AscensionSnapshot {
             AscensionSnapshot.getAscensionData(
                 typeFilter,
                 pathFilter,
-                AscensionSnapshot.ACCORDION_THIEF,
+                AscensionClass.ACCORDION_THIEF,
                 mainBoardSize,
                 classBoardSize,
                 maxAge,
@@ -798,8 +736,8 @@ public class AscensionSnapshot {
 
   public static final String getAscensionData(
       final int typeFilter,
-      final int pathFilter,
-      final int classFilter,
+      final Path pathFilter,
+      final AscensionClass classFilter,
       final int mainBoardSize,
       final int classBoardSize,
       final int maxAge,
@@ -843,7 +781,7 @@ public class AscensionSnapshot {
 
     List<AscensionDataField> leaderList = new ArrayList<AscensionDataField>();
     int leaderListSize =
-        classFilter == AscensionSnapshot.NO_FILTER
+        classFilter == null
             ? (mainBoardSize == 0 ? 10 : mainBoardSize)
             : classBoardSize == 0 ? 5 : classBoardSize;
 
@@ -865,189 +803,20 @@ public class AscensionSnapshot {
     strbuf.append(KoLConstants.LINE_BREAK);
     strbuf.append("<tr><td style=\"color:white\" align=center bgcolor=blue><b>");
 
-    switch (classFilter) {
-      case NO_FILTER:
-        strbuf.append("Fastest ");
+    if (classFilter == null) {
+      strbuf.append("Fastest ");
 
-        strbuf.append(
-            typeFilter == AscensionSnapshot.NORMAL
-                ? "Normal "
-                : typeFilter == AscensionSnapshot.HARDCORE ? "Hardcore " : "Casual ");
-        strbuf.append(
-            pathFilter == AscensionSnapshot.NO_FILTER
-                ? ""
-                : pathFilter == AscensionSnapshot.NOPATH
-                    ? "No-Path "
-                    : pathFilter == AscensionSnapshot.TEETOTALER
-                        ? "Teetotaler "
-                        : pathFilter == AscensionSnapshot.BOOZETAFARIAN
-                            ? "Boozetafarian "
-                            : pathFilter == AscensionSnapshot.OXYGENARIAN
-                                ? "Oxygenarian "
-                                : pathFilter == AscensionSnapshot.BAD_MOON
-                                    ? "Bad Moon "
-                                    : pathFilter == AscensionSnapshot.BEES_HATE_YOU
-                                        ? "Bees Hate You "
-                                        : pathFilter == AscensionSnapshot.SURPRISING_FIST
-                                            ? "Way of the Surprising Fist "
-                                            : pathFilter == AscensionSnapshot.TRENDY
-                                                ? "Trendy "
-                                                : pathFilter == AscensionSnapshot.AVATAR_OF_BORIS
-                                                    ? "Avatar of Boris "
-                                                    : pathFilter
-                                                            == AscensionSnapshot.BUGBEAR_INVASION
-                                                        ? "Bugbear Invasion "
-                                                        : pathFilter
-                                                                == AscensionSnapshot.ZOMBIE_SLAYER
-                                                            ? "Zombie Slayer "
-                                                            : pathFilter
-                                                                    == AscensionSnapshot.CLASS_ACT
-                                                                ? "Class Act "
-                                                                : pathFilter
-                                                                        == AscensionSnapshot
-                                                                            .AVATAR_OF_JARLSBERG
-                                                                    ? "Avatar of Jarlsberg "
-                                                                    : pathFilter
-                                                                            == AscensionSnapshot.BIG
-                                                                        ? "BIG! "
-                                                                        : pathFilter
-                                                                                == AscensionSnapshot
-                                                                                    .KOLHS
-                                                                            ? "KOLHS "
-                                                                            : pathFilter
-                                                                                    == AscensionSnapshot
-                                                                                        .CLASS_ACT_II
-                                                                                ? "Class Act II: A Class For Pigs "
-                                                                                : pathFilter
-                                                                                        == AscensionSnapshot
-                                                                                            .AVATAR_OF_SNEAKY_PETE
-                                                                                    ? "Avatar of Sneaky Pete "
-                                                                                    : pathFilter
-                                                                                            == AscensionSnapshot
-                                                                                                .SLOW_AND_STEADY
-                                                                                        ? "Slow and Steady "
-                                                                                        : pathFilter
-                                                                                                == AscensionSnapshot
-                                                                                                    .HEAVY_RAINS
-                                                                                            ? "Heavy Rains "
-                                                                                            : pathFilter
-                                                                                                    == AscensionSnapshot
-                                                                                                        .PICKY
-                                                                                                ? "Picky "
-                                                                                                : pathFilter
-                                                                                                        == AscensionSnapshot
-                                                                                                            .STANDARD
-                                                                                                    ? "Standard "
-                                                                                                    : pathFilter
-                                                                                                            == AscensionSnapshot
-                                                                                                                .ACTUALLY_ED_THE_UNDYING
-                                                                                                        ? "Actually Ed the Undying "
-                                                                                                        : pathFilter
-                                                                                                                == AscensionSnapshot
-                                                                                                                    .CRAZY_RANDOM_SUMMER
-                                                                                                            ? "One Crazy Random Summer "
-                                                                                                            : pathFilter
-                                                                                                                    == AscensionSnapshot
-                                                                                                                        .COMMUNITY_SERVICE
-                                                                                                                ? "Community Service "
-                                                                                                                : pathFilter
-                                                                                                                        == AscensionSnapshot
-                                                                                                                            .AVATAR_OF_WEST_OF_LOATHING
-                                                                                                                    ? "Avatar of West of Loathing "
-                                                                                                                    : pathFilter
-                                                                                                                            == AscensionSnapshot
-                                                                                                                                .THE_SOURCE
-                                                                                                                        ? "The Source "
-                                                                                                                        : pathFilter
-                                                                                                                                == AscensionSnapshot
-                                                                                                                                    .NUCLEAR_AUTUMN
-                                                                                                                            ? "Nuclear Autumn "
-                                                                                                                            : pathFilter
-                                                                                                                                    == AscensionSnapshot
-                                                                                                                                        .GELATINOUS_NOOB
-                                                                                                                                ? "Gelatinous Noob "
-                                                                                                                                : pathFilter
-                                                                                                                                        == AscensionSnapshot
-                                                                                                                                            .LICENSE
-                                                                                                                                    ? "License to Adventure "
-                                                                                                                                    : pathFilter
-                                                                                                                                            == AscensionSnapshot
-                                                                                                                                                .REPEAT
-                                                                                                                                        ? "Live. Ascend. Repeat. "
-                                                                                                                                        : pathFilter
-                                                                                                                                                == AscensionSnapshot
-                                                                                                                                                    .POKEFAM
-                                                                                                                                            ? "Pocket Familiars "
-                                                                                                                                            : pathFilter
-                                                                                                                                                    == AscensionSnapshot
-                                                                                                                                                        .GLOVER
-                                                                                                                                                ? "G-Lover "
-                                                                                                                                                : pathFilter
-                                                                                                                                                        == AscensionSnapshot
-                                                                                                                                                            .DISGUISES_DELIMIT
-                                                                                                                                                    ? "Disguises Delimit "
-                                                                                                                                                    : pathFilter
-                                                                                                                                                            == AscensionSnapshot
-                                                                                                                                                                .DARK_GYFFTE
-                                                                                                                                                        ? "Dark Gyffte "
-                                                                                                                                                        : pathFilter
-                                                                                                                                                                == AscensionSnapshot
-                                                                                                                                                                    .CRAZY_RANDOM_SUMMER_TWO
-                                                                                                                                                            ? "Two Crazy Random Summer "
-                                                                                                                                                            : pathFilter
-                                                                                                                                                                    == AscensionSnapshot
-                                                                                                                                                                        .KINGDOM_OF_EXPLOATHING
-                                                                                                                                                                ? "Kingdom of Exploathing "
-                                                                                                                                                                : pathFilter
-                                                                                                                                                                        == AscensionSnapshot
-                                                                                                                                                                            .PATH_OF_THE_PLUMBER
-                                                                                                                                                                    ? "Path of the Plumber "
-                                                                                                                                                                    : pathFilter
-                                                                                                                                                                            == AscensionSnapshot
-                                                                                                                                                                                .LOWKEY
-                                                                                                                                                                        ? "Low Key Summer"
-                                                                                                                                                                        : "");
+      strbuf.append(
+          typeFilter == AscensionSnapshot.NORMAL
+              ? "Normal "
+              : typeFilter == AscensionSnapshot.HARDCORE ? "Hardcore " : "Casual ");
+      strbuf.append(pathFilter == null ? "" : pathFilter.getName());
 
-        strbuf.append("Ascensions (Out of ");
-        strbuf.append(resultsList.size());
-        strbuf.append(")");
-        break;
-
-      case SEAL_CLUBBER:
-        strbuf.append("Seal Clubber");
-        break;
-
-      case TURTLE_TAMER:
-        strbuf.append("Turtle Tamer");
-        break;
-
-      case PASTAMANCER:
-        strbuf.append("Pastamancer");
-        break;
-
-      case SAUCEROR:
-        strbuf.append("Sauceror");
-        break;
-
-      case DISCO_BANDIT:
-        strbuf.append("Disco Bandit");
-        break;
-
-      case ACCORDION_THIEF:
-        strbuf.append("Accordion Thief");
-        break;
-
-      case COW_PUNCHER:
-        strbuf.append("Cow Puncher");
-        break;
-
-      case BEAN_SLINGER:
-        strbuf.append("Bean Slinger");
-        break;
-
-      case SNAKE_OILER:
-        strbuf.append("Snake Oiler");
-        break;
+      strbuf.append("Ascensions (Out of ");
+      strbuf.append(resultsList.size());
+      strbuf.append(")");
+    } else {
+      strbuf.append(classFilter.getName());
     }
 
     strbuf.append(
@@ -1104,17 +873,9 @@ public class AscensionSnapshot {
       request.getAscensionData().toArray(fields);
 
       for (AscensionDataField field : fields) {
-        if (field.matchesFilter(
-            AscensionSnapshot.NORMAL,
-            AscensionSnapshot.NO_FILTER,
-            AscensionSnapshot.NO_FILTER,
-            0)) {
+        if (field.matchesFilter(AscensionSnapshot.NORMAL, null, null, 0)) {
           AscensionSnapshot.softcoreAscensionList.add(field);
-        } else if (field.matchesFilter(
-            AscensionSnapshot.HARDCORE,
-            AscensionSnapshot.NO_FILTER,
-            AscensionSnapshot.NO_FILTER,
-            0)) {
+        } else if (field.matchesFilter(AscensionSnapshot.HARDCORE, null, null, 0)) {
           AscensionSnapshot.hardcoreAscensionList.add(field);
         } else {
           AscensionSnapshot.casualAscensionList.add(field);

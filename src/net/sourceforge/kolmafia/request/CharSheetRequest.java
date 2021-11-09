@@ -9,13 +9,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import net.sourceforge.kolmafia.AscensionClass;
+import net.sourceforge.kolmafia.AscensionPath.Path;
 import net.sourceforge.kolmafia.KoLCharacter;
 import net.sourceforge.kolmafia.KoLConstants;
 import net.sourceforge.kolmafia.KoLmafia;
 import net.sourceforge.kolmafia.moods.HPRestoreItemList;
 import net.sourceforge.kolmafia.objectpool.EffectPool;
 import net.sourceforge.kolmafia.objectpool.SkillPool;
-import net.sourceforge.kolmafia.persistence.AscensionSnapshot;
 import net.sourceforge.kolmafia.persistence.SkillDatabase;
 import net.sourceforge.kolmafia.preferences.Preferences;
 import net.sourceforge.kolmafia.session.ResultProcessor;
@@ -246,20 +247,14 @@ public class CharSheetRequest extends GenericRequest {
     KoLCharacter.setRestricted(responseText.contains("standard.php"));
 
     // Consumption restrictions have special messages.
-    //
-    // "You may not eat or drink anything."
-    // "You may not eat any food or drink any non-alcoholic beverages."
-    // "You may not consume any alcohol."
-
-    KoLCharacter.setConsumptionRestriction(
-        responseText.contains("You may not eat or drink anything.")
-            ? AscensionSnapshot.OXYGENARIAN
-            : responseText.contains(
-                    "You may not eat any food or drink any non-alcoholic beverages.")
-                ? AscensionSnapshot.BOOZETAFARIAN
-                : responseText.contains("You may not consume any alcohol.")
-                    ? AscensionSnapshot.TEETOTALER
-                    : AscensionSnapshot.NOPATH);
+    if (responseText.contains("You may not eat or drink anything.")) {
+      KoLCharacter.setPath(Path.OXYGENARIAN);
+    } else if (responseText.contains(
+        "You may not eat any food or drink any non-alcoholic beverages.")) {
+      KoLCharacter.setPath(Path.BOOZETAFARIAN);
+    } else if (responseText.contains("You may not consume any alcohol.")) {
+      KoLCharacter.setPath(Path.TEETOTALER);
+    }
 
     // You are in Hardcore mode, and may not receive items or buffs
     // from other players.
@@ -355,7 +350,7 @@ public class CharSheetRequest extends GenericRequest {
 
     // If you have the Cowrruption effect, you can Absorb Cowrruption if a Cow Puncher
     if (KoLConstants.activeEffects.contains(EffectPool.get(EffectPool.COWRRUPTION))
-        && KoLCharacter.getClassType() == KoLCharacter.COWPUNCHER) {
+        && KoLCharacter.getAscensionClass() == AscensionClass.COWPUNCHER) {
       UseSkillRequest skill = UseSkillRequest.getUnmodifiedInstance("Absorb Cowrruption");
       newSkillSet.add(skill);
     }
@@ -372,7 +367,7 @@ public class CharSheetRequest extends GenericRequest {
     KoLCharacter.setPermedSkills(permedSkillSet);
 
     // Finally, set the class name that we figured out.
-    KoLCharacter.setClassName(className);
+    KoLCharacter.setAscensionClass(className);
 
     // Update uneffect methods and heal amounts for updated skills
     UneffectRequest.reset();
@@ -413,7 +408,7 @@ public class CharSheetRequest extends GenericRequest {
    * instead. Note that this advances the <code>StringTokenizer</code> one token ahead of the base
    * value for the statistic.
    *
-   * @param st The <code>StringTokenizer</code> possibly containing the base value
+   * @param token The <code>StringTokenizer</code> possibly containing the base value
    * @param defaultBase The value to return, if no base value is found
    * @return The parsed base value, or the default value if no base value is found
    */
